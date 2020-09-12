@@ -22,10 +22,12 @@
         <button type="submit" class="btn btn-primary">Adicionar</button>
 
       </form>
-    
-    </section>
-        {% comment %} <a class="btn btn-danger" href="{% url 'delete_products' produto.id %}">Delete</a> {% endcomment %}
+      <br>
+      {% if operadores %}
+        <a class="btn btn-danger" href="{% url 'delete_caixa' operadores.id %}">Delete</a>
+      {% endif %}
 
+    </section>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

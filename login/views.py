@@ -4,10 +4,28 @@ from django.contrib.auth.decorators import login_required
 from .models import Operador as caixa, Produtos as prod
 from .form import ProductForm, CaixaForm
 
+
+
+#COMPRAS
+@login_required
+def listar_produtos_disponiveis(request):
+    produtos = prod.objects.all()
+    return render(request, 'compras.html', {'produtos': produtos})
+
+def soma_preco(request):
+    if(request.GET.get('add')):
+        preco = prod.preco
+
+        return preco
+    
+    return preco
+
+#PRODUTOS
 @login_required
 def list_products(request):
     produtos = prod.objects.all()
     return render(request, 'produtos.html', {'produtos': produtos})
+
 
 @login_required
 def create_products(request):

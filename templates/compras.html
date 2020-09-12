@@ -1,7 +1,8 @@
 <!doctype html>
+{% load humanize %}
 <html lang="pt-br">
   <head>
-    <title>Produtos</title>
+    <title>Caixa</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,29 +13,39 @@
   <body>
   <br>
     <section class="container">
-        <h1>Página administrativa</h1>
+        <h1>Página de compras</h1>
 
         <a class="btn btn-light" href="{% url 'list_caixa' %}">Caixa</a>
         <a class="btn btn-light" href="{% url 'list_products' %}">Produtos</a>
         <a class="btn btn-light" href="{% url 'listar_produtos_disponiveis' %}">Compras</a>
-        <br>
-        <br>
-        <a class="btn btn-primary" href="{% url 'create_products' %}">Adicionar produto</a>
+
         <hr>
+
+        <h4>Produtos disponíveis:</h4>
         
-        <h4>Produtos do super mercado:</h4>
-        <ul class="list-group ">
-            {% for  produto in produtos  %}
-                <li class="list-group-item"> {{ produto.nome }}: R$ {{ produto.preco|floatformat:2 }}</li>
-                <a class="btn btn-primary btn-sm" href="{% url 'update_products' produto.id %}">Editar</a>
-                <a class="btn btn-danger btn-sm" href="{% url 'delete_products' produto.id %}">Remover</a>
-                <hr>
-            {% endfor %}       
-        </ul> 
+        <ul class="list-group col-lg-8 d-inline-flex flex-wrap">
+          {% for  produto in produtos  %}
+              <li class="list-group-item col-lg-5 d-flex p-2 bd-highlight justify-content-between align-items-center"> 
+              {{ produto.nome }}: R$ {{ produto.preco|floatformat:2 }}
+              
+              <button type="submit" class="btn btn-primary" id="adicionar" onclick="soma()">+</button></li>
+              
+              <hr>
+          {% endfor %}       
+        </ul>
         
-        <br>
+
+        <div class="d-flex bd-highlight col-lg-11 justify-content-between">
+          <h2>Total:</h2>
+          <h2 id="valor">R$ 0,00</h2>
+        </div>
+        
     </section>
 
+
+    <script>
+      
+    </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
