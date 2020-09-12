@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 from djongo import models
+from django.urls import reverse
 
 #Create your models here.
 class Operador(models.Model):
