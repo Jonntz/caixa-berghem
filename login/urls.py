@@ -1,9 +1,12 @@
 from django.urls import path, include 
 from .views import *
 
+from . import views
+
 urlpatterns = [
     path('accounts/', include('registro.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('logout', views.logout, name='logout'),
     
     #CAIXA
     path('', listar_produtos_disponiveis, name='listar_produtos_disponiveis'),
