@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-# from django.http import HttpResponse
+from django.contrib.auth.models import auth
 from .models import Operador as caixa, Produtos as prod
 from .form import ProductForm, CaixaForm
 
@@ -95,3 +95,8 @@ def delete_caixa(request, id):
         return redirect('list_caixa')
     
     return render(request, 'caixa-delete-confirm.html', {'operadores': operadores})
+
+#LOGOUT
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
