@@ -1,4 +1,4 @@
-# caixa-berghem
+# Caixa-berghem
 Aplicação web feita em Django de MongoDB (noSQL) para a oportunidade de emprego na empresa Berghem CyberSecurity
 
 ---------------
