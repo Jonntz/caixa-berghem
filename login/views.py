@@ -3,22 +3,33 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import auth
 from .models import Operador as caixa, Produtos as prod
 from .form import ProductForm, CaixaForm
-
+# from django import template
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 #COMPRAS
 @login_required
 def listar_produtos_disponiveis(request):
-    produtos = prod.objects.all()
-    return render(request, 'compras.html', {'produtos': produtos})
+        produtos = prod.objects.all()
+        return render(request, 'compras.html', {'produtos': produtos})
 
-def soma_preco(request):
-    if(request.GET.get('add')):
-        preco = prod.preco
+        def post(self, request, *args, **kwargs):
+            if request.method == "POST":
+                produto_id = request.POST.getlist('preco[]')
+                for preco in produto_id:
+                    produtos = prod.objects.get(pk=id)
+                    produtos.save()
 
-        return preco
-    
-    return preco
+            return redirect('listar_produtos_disponiveis')
+        
+# class Preco_view(View):
+#     def get(self, request):
+#         produto = prod.objects.all()
+#         context ={
+#             'produto': produto
+#         }
+#         return render(request, 'compras.html', context)
 
 #PRODUTOS
 @login_required

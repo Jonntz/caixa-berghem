@@ -11,17 +11,18 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-  <br>
-    <h1>Tela de registro</h1>
-    <br>
-    <form method="POST">
-        {% csrf_token %}
+    <section class="container">
+      <br>
+      <h1>Tela de registro</h1>
+      <br>
+      <form method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="text" value="{{ next }}">
 
-        <input type="hidden" name="text" value="{{ next }}">
-
-        {{ form | crispy }}
-        <button type="submit" class="btn btn-primary">Registrar</button>
-    </form>
+          {{ form | crispy }}
+          <button type="submit" class="btn btn-primary">Registrar</button>
+      </form>
+    </section>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
