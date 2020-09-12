@@ -28,3 +28,5 @@ Caso o passo 5 dê algum conflito, verifiqque se o python está instalado na sua
 
 Com o servidor rodando basta digitar o endereço a seguir no seu navegador:
 http://127.0.0.1:8000/
+
+Agora basta criar a conta e explorar o aplicativo!
