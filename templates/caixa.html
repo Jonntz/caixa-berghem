@@ -25,6 +25,7 @@
 
         <a class="btn btn-light" href="{% url 'list_caixa' %}">Caixa</a>
         <a class="btn btn-light" href="{% url 'list_products' %}">Produtos</a>
+        <a class="btn btn-light" href="{% url 'listar_produtos_disponiveis' %}">Compras</a>
         <br>
         <br>
         <a class="btn btn-primary" href="{% url 'create_caixa' %}">Adicionar operador</a>
@@ -32,7 +33,7 @@
         <h4> Operadores de caixa: </h4>
         <ul class="list-group ">
             {% for  op in operadores  %}
-                <li class="list-group-item"> Nome:{{ op.nome }}, Idade:{{ op.idade }}, Identificação: {{ op.identificacao }}</li>
+                <li class="list-group-item"> Nome: {{ op.nome }}, Idade: {{ op.idade }}, Identificação: {{ op.identificacao }}</li>
                 <a class="btn btn-primary btn-sm" href="{% url 'update_caixa' op.id %}">Editar</a> 
                 <a class="btn btn-danger btn-sm" href="{% url 'delete_caixa' op.id %}">Remover</a> 
                 <hr>
