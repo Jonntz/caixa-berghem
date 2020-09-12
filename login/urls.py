@@ -2,6 +2,7 @@ from django.urls import path, include
 from .views import *
 
 urlpatterns = [
+    path('accounts/', include('registro.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     
     #CAIXA
