@@ -29,11 +29,11 @@
 
         <h4>Produtos disponíveis:</h4>
         
-        <ul class="list-group col-lg-8 d-inline-flex flex-wrap">
+        <ul class="list-group col-lg-8 d-inline-flex">
           {% for  produto in produtos  %}
-              <li class="list-group-item col-lg-5 .flex-lg-column p-2 bd-highlight justify-content-between align-items-center"> 
+              <li class="list-group-item col-lg-5 .flex-lg-row p-2 bd-highlight justify-content-between align-items-center"> 
               {{ produto.nome }}: R$ {{ produto.preco|floatformat:2 }}
-                  <input type="checkbox" class="form-check-input col-lg-12 " name="produto_id[]" id="adicionar" value="{{ produto.preco|floatformat:2 }}">         
+                  <input type="checkbox" class="form-check-input col-lg-11" name="produto_id[]" id="adicionar" value="{{ produto.preco|floatformat:2 }}">         
               </li>
               
               <hr>
@@ -41,24 +41,41 @@
         </ul>
         <form method="POST">
           {% csrf_token %}
-          <button type="submit" class="btn btn-primary" id="add" >Adicionar</button>
+          <button type="submit" class="btn btn-primary" id="add" >Adicionar ou atualizar</button>
         </form><br>
+
+        <form method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" class="form-control" name="pagamento" id="pagamento" placeholder="Com quanto você irá pagar?"><br>
+              <button type="submit" class="btn btn-primary" id="pagar" >Pagar</button>
+          </div>
+        </form>
 
         <div class="d-flex bd-highlight col-lg-11 justify-content-between">
           <h2>Total:</h2>
-          <h2 id="valor">
-            R$ 0.00
+          <h2>
+            R$ <span id="valor">0.00</span>
           </h2>
         </div>
-        
-    </section>
+        <hr>
+        <div class="d-flex bd-highlight col-lg-11 justify-content-between">
+          <h3>Troco:</h3>
+          <h3>
+            R$ <span id="troco">0.00</span>
+          </h3>
+        </div>
+        <br>
+        <br>       
+      </section>
 
     <script>
       $(document).ready(function(){
         $('#add').click(function(e){
           e.preventDefault();
-          if(confirm("Deseja adicionar estes itens?")){
+          if(confirm("Deseja adicionar ou atualizar estes itens?")){
             var preco = [];
+            var soma =0;
             var csrf = $('input[name=csrfmiddlewaretoken]').val();
             $(':checkbox:checked').each(function(i){
               preco[i] = parseFloat($(this).val());
@@ -66,7 +83,7 @@
             if(preco.length === 0){
               alert("Por favor adicione itens");
             } else {
-              console.log(preco);
+              //console.log(preco);
               $.ajax({
                 url:".",
                 method: "POST",
@@ -75,15 +92,29 @@
                   csrfmiddlewaretoken: csrf
                 },
                 success: function(response){
-                  var soma =0;
+                  
                   for(var i=0; i < preco.length; i++){
                     if (preco[i] > 0){
                       soma += preco[i]; 
                     }
-                    $("#valor").html('R$ ' + soma.toFixed(2));
+                    $("#valor").html(soma.toFixed(2));
                   }
-                }
+                }   
               });
+
+            // TROCO
+            $('#pagar').click(function(e){
+              e.preventDefault();
+              //console.log(soma);
+              var pagamento = $("#pagamento").val();
+              //console.log(pagamento);
+              if(soma > pagamento){
+                alert("Dinheiro insulficiente");
+              } else {
+                var troco = pagamento - soma;
+                 $("#troco").html(troco.toFixed(2));
+              }
+            });
             }
           }
         });
