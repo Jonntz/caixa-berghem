@@ -75,8 +75,12 @@
                   csrfmiddlewaretoken: csrf
                 },
                 success: function(response){
+                  var soma =0;
                   for(var i=0; i < preco.length; i++){
-                    $("#valor").html('R$ ' + preco);
+                    if (preco[i] > 0){
+                      soma += preco[i]; 
+                    }
+                    $("#valor").html('R$ ' + soma.toFixed(2));
                   }
                 }
               });
